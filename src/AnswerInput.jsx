@@ -1,38 +1,23 @@
 import React, { useState } from 'react';
 
-function AnswerInput() {
-    const [answer, setAnswer] = useState('');
-    //Example for now, will move to parent component later
-    const [isCorrect, setIsCorrect] = useState(null);
-
-    const correctAnswer = 'ga'; //Example
+export default function AnswerInput({ isCorrect, handleInputSubmit }) {
+    const [input, setInput] = useState('');
 
     const handleInputChange = (event) => {
-        setAnswer(event.target.value);
-    }
-
-    //Example toy function to check if answer is correct
-    const checkAnswer = (answer) => {
-        if(answer === correctAnswer) {
-            setIsCorrect(true);
-        } else {
-            setIsCorrect(false);
-        }
-        setAnswer('');
+        setInput(event.target.value);
     }
 
     const handleSubmit = () => {
-        checkAnswer(answer);
-        setAnswer('');
+        handleInputSubmit(input);
+        setInput('');
     }
 
-    //Example behavior for now, will move onto the parent component later
     return (
         <div>
             <div>
                 <input 
                     type="text" 
-                    value={answer}
+                    value={input}
                     onChange={handleInputChange}/>
                 <button onClick={handleSubmit}>Submit</button>
             </div>
@@ -48,5 +33,3 @@ function AnswerInput() {
         </div>
         );
 }
-
-export default AnswerInput;
