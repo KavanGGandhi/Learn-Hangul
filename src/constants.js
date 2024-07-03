@@ -78,4 +78,9 @@ export const hangulCharacters = {
         },
 
     ],
-}
+};
+
+export const scoreInitialState = {
+    correct: 0,
+    total: 0
+};
