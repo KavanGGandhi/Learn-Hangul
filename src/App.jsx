@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import './App.css'
 import AnswerInput from './AnswerInput.jsx'
 import { scoreInitialState } from './constants'
 
@@ -46,12 +45,21 @@ export default function App({ questions }) {
     
     return (
         <div>
-            <h2>{score.correct + '/' + score.total}</h2>
-            <h1>Hangul Practice</h1>
-            <div>
-                <h2>{question}</h2>
+            <div class="top">
+                <button class="settings"> Settings </button>
+                <div class="scoreboard">
+                    {score.correct + '/' + score.total}
+                </div>
             </div>
-            <AnswerInput isCorrect={isCorrect} handleInputSubmit={handleInputSubmit}/>
+            <div class="rest">
+                <div class="title">
+                    Hangul Practice
+                </div>
+                <div>
+                    <div class="kSymbol">{question}</div>
+                </div>
+                <AnswerInput isCorrect={isCorrect} handleInputSubmit={handleInputSubmit}/>
+            </div>
         </div>
     )
 };

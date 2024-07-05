@@ -16,6 +16,7 @@ export default function AnswerInput({ isCorrect, handleInputSubmit }) {
         <div>
             <div>
                 <input 
+                    class="answerInput"
                     type="text" 
                     value={input}
                     onChange={handleInputChange}/>
