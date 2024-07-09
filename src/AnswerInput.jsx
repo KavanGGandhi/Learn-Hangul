@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
-export default function AnswerInput({ isCorrect, handleInputSubmit }) {
-    const [input, setInput] = useState('');
+export default function AnswerInput({ input, setInput, isCorrect, handleInputSubmit }) {
 
     const handleInputChange = (event) => {
         setInput(event.target.value);
@@ -12,15 +11,22 @@ export default function AnswerInput({ isCorrect, handleInputSubmit }) {
         setInput('');
     }
 
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter') {
+            handleSubmit();
+        }
+    }
+
     return (
         <div>
             <div>
                 <input 
-                    class="answerInput"
+                    className="answerInput"
                     type="text" 
                     value={input}
-                    onChange={handleInputChange}/>
-                <button onClick={handleSubmit}>Submit</button>
+                    onChange={handleInputChange}
+                    onKeyDown={handleKeyDown}/>
+                <button className="submit" onClick={handleSubmit}>Submit</button>
             </div>
             {isCorrect === true && (
                 <div style={{color: 'green'}}>Correct!</div>

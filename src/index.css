@@ -3,7 +3,7 @@
 }
 
 #root {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Comic Sans MS", cursive;
   line-height: 1.5;
   font-weight: 400;
   height: 100vh;
@@ -19,9 +19,8 @@ body{
   text-align: center;
   height: 100vh;
   width: 100vw;
-  background-color: #C0C0C0;
-  color: black;
   line-height: 1.5;
+  font-size: 1em;
 }
 
 .top{
@@ -34,6 +33,7 @@ body{
   top: 0;
   background-color: #f5f5f5;
   padding: 0 20px;
+  color: black;
 }
 
 .scoreboard {
@@ -41,11 +41,11 @@ body{
   vertical-align: middle;
   text-align: center;
   font-family: fantasy;
-  font-size: 25px;
+  font-size: 1.6em;
   padding: 8px 16px;
 }
 
-.settings {
+.settingsButton {
   border: none;
   border-radius: 8px;
   padding: 8px 16px;
@@ -54,46 +54,135 @@ body{
   cursor: pointer;
 }
 
-.settings:hover {
+.settingsButton:hover {
   background-color: #dcdcdc;
 }
 
-.title {
-  font-size: 100px;
-  font-family: monospace;
-  margin: 0;
-  padding: 0;
-  color: #1a1a1a;
+.skip {
+  margin-top: 10%;
+  border: 5px #5e5e5e solid;
+  border-radius: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 55px;
+  height: 55px;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #ff0000;
+  color: white;
+  font-family: "Comic Sans MS", cursive;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.skip:hover {
+  background-color: #dd0000;
+}
+
+.answers {
+  display: flex;
+  width: 40%;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: center;
+  padding-inline-start: 0;
+  list-style: none;
+  height: 25px;
+  font-size: 1.2em;
+  margin-block-end: -30px;
+  margin-block-start: 0;
+  color: black;
+}
+
+li {
+  margin-left: 3px;
 }
 
 .kSymbol {
   font-family: 'AppleMyungjo', serif;
-  font-size: 300px;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+  font-size: 18.75em;
+  line-height: normal;
+  padding-top: 1%;
+  padding-left: 2px;
+  padding-right: 2px;
+  border-radius: 3px;
+  border: 3px solid #3d3d3d;
+  width: 40%;
+  margin-top: 0;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #e2e2e2;
+  color: black;
 }
 
 .answerInput {
   width: 200px;
   height: 30px;
-  font-size: 20px;
+  font-size: 1.3em;
   text-align: center;
+  background-color: #ffffff;
+  color: inherit;
+  padding: 5px;
+  border: 2px solid #b5b5b5;
+  border-radius: 8px;
 }
 
-button {
+.submit {
   border-radius: 8px;
-  border: 1px solid black;
+  border: 3px solid #b5b5b5;
   padding: 0.6em 1.2em;
   font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: inherit;
+  letter-spacing: 1px;
+  font-weight: bold;
+  font-family: "Comic Sans MS", cursive;
+  background-color: white;
   cursor: pointer;
-  transition: border-color 0.25s;
+  color: #3c99dc;
 }
-button:hover {
-  border-color: #646cff;
+.submit:hover {
+  background-color: #dedfe4;
+}
+
+body.active-modal {
+  overflow-y: hidden;
+}
+
+.settingsModal, .overlay {
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+}
+
+.overlay {
+  background: rgba(49,49,49,0.8);
+}
+.modalContent {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  line-height: 1.4;
+  background: #f1f1f1;
+  padding: 14px 28px;
+  border-radius: 3px;
+  max-width: 600px;
+  min-width: 300px;
+}
+
+.closeModal {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px 7px;
+  cursor: pointer;
 }
