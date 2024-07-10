@@ -59,7 +59,7 @@ body{
 }
 
 .skip {
-  margin-top: 10%;
+  margin-top: 8%;
   border: 5px #5e5e5e solid;
   border-radius: 100%;
   padding-top: 10px;
@@ -93,7 +93,7 @@ body{
   list-style: none;
   height: 25px;
   font-size: 1.2em;
-  margin-block-end: -30px;
+  margin-block-end: -25px;
   margin-block-start: 0;
   color: black;
 }

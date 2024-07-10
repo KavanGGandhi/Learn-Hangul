@@ -2,8 +2,11 @@ import { useState } from 'react'
 import AnswerInput from './AnswerInput.jsx'
 import { scoreInitialState } from './constants'
 
-export default function App({ questions }) {
-    const [currentQuestion, setCurrentQuestion] = useState(Math.floor(Math.random() * questions.length));
+export default function App({ consonants, vowels }) {
+    const [questions, setQuestions] = useState(consonants.concat(vowels));
+    const [questionsLength, setQuestionsLength] = useState(consonants.concat(vowels).length);
+
+    const [currentQuestion, setCurrentQuestion] = useState(Math.floor(Math.random() * questionsLength));
     const {question, answer} = questions[currentQuestion];
     const [isCorrect, setIsCorrect] = useState(null);
     const [score, setScore] = useState(scoreInitialState);
@@ -11,8 +14,33 @@ export default function App({ questions }) {
     const [input, setInput] = useState('');
     const [skip, setSkip] = useState(false);
     const [modal, setModal] = useState(false);
+    const [consonantTrue, setConsonantTrue] = useState(true);
+    const [vowelTrue, setVowelTrue] = useState(true);
 
     const answerList = answer.map((element, i) => [ i > 0 && ", ", <li key={i}>{element}</li>]);
+
+    const updateSettings = () => {
+        let temp = [];
+        if (consonantTrue) {
+            temp = temp.concat(consonants);
+        }
+        if (vowelTrue) {
+            temp = temp.concat(vowels);
+        }
+        setQuestions(temp);
+        setQuestionsLength(temp.length);
+        setCurrentQuestion(Math.floor(Math.random() * questionsLength));
+    }
+
+    const toggleConsonants = () => {
+        setConsonantTrue(!consonantTrue);
+        updateSettings();
+    }
+
+    const toggleVowels = () => {
+        setVowelTrue(!vowelTrue);
+        updateSettings();
+    }
 
     const handleInputSubmit = (input) => {
         if (answer.includes(input)) {
@@ -83,7 +111,14 @@ export default function App({ questions }) {
             {modal && (<div className='settingsModal'>
                 <div className='overlay'></div>
                 <div className='modalContent'>
-                    Hello World
+                    Settings
+                    <br></br>
+                    <button 
+                    style={consonantTrue ? {backgroundColor: "green"} : {backgroundColor: "red"}}
+                    onClick={toggleConsonants}>Consonants</button>
+                    <button 
+                    style={vowelTrue ? {backgroundColor: "green"} : {backgroundColor: "red"}} 
+                    onClick={toggleVowels}>Vowels</button>
                     <button onClick={toggleSettings} className='closeModal'>X</button>
                 </div>
                 

@@ -6,6 +6,6 @@ import { hangulCharacters } from './constants'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <App questions={hangulCharacters.questions} />
+    <App consonants={hangulCharacters.consonants} vowels={hangulCharacters.vowels} />
   </React.StrictMode>,
 )
