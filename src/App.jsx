@@ -4,9 +4,8 @@ import { scoreInitialState } from './constants'
 
 export default function App({ consonants, vowels }) {
     const [questions, setQuestions] = useState(consonants.concat(vowels));
-    const [questionsLength, setQuestionsLength] = useState(consonants.concat(vowels).length);
 
-    const [currentQuestion, setCurrentQuestion] = useState(Math.floor(Math.random() * questionsLength));
+    const [currentQuestion, setCurrentQuestion] = useState(Math.floor(Math.random() * questions.length));
     const {question, answer} = questions[currentQuestion];
     const [isCorrect, setIsCorrect] = useState(null);
     const [score, setScore] = useState(scoreInitialState);
