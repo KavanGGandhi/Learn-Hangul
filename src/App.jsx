@@ -1,12 +1,24 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import AnswerInput from './AnswerInput.jsx'
 import { scoreInitialState } from './constants'
+
+//Function to shuffle the array of questions
+const shuffleArray = (array) => {
+    return array.sort(() => Math.random() - 0.5);
+}
 
 export default function App({ consonants, vowels }) {
     const [questions, setQuestions] = useState(consonants.concat(vowels));
 
-    const [currentQuestion, setCurrentQuestion] = useState(Math.floor(Math.random() * questions.length));
-    const {question, answer} = questions[currentQuestion];
+    //State for the shuffled questions array
+    const [shuffledQuestions, setShuffledQuestions] = useState([]);
+
+    // State for the current question index
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    //Using a different method to randomize, this is the old method
+    //const [currentQuestion, setCurrentQuestion] = useState(Math.floor(Math.random() * questions.length));
+    //const {question, answer} = questions[currentQuestion];
     const [isCorrect, setIsCorrect] = useState(null);
     const [score, setScore] = useState(scoreInitialState);
     const [wrongAnswer, setWrongAnswer] = useState(false);
@@ -16,7 +28,6 @@ export default function App({ consonants, vowels }) {
     const [consonantTrue, setConsonantTrue] = useState(true);
     const [vowelTrue, setVowelTrue] = useState(true);
 
-    const answerList = answer.map((element, i) => [ i > 0 && ", ", <li key={i}>{element}</li>]);
 
     const updateSettings = () => {
         let temp = [];
@@ -27,22 +38,27 @@ export default function App({ consonants, vowels }) {
             temp = temp.concat(vowels);
         }
         setQuestions(temp);
-        setQuestionsLength(temp.length);
-        setCurrentQuestion(Math.floor(Math.random() * questionsLength));
+        //setQuestionsLength(temp.length);
+        //setCurrentQuestion(Math.floor(Math.random() * questionsLength));
+        let temp2 = shuffleArray([...temp]);
+        setShuffledQuestions(temp2);
+        //console.log(temp2);
+        setCurrentIndex(0);
     }
 
     const toggleConsonants = () => {
         setConsonantTrue(!consonantTrue);
-        updateSettings();
+        //updateSettings();
     }
 
     const toggleVowels = () => {
         setVowelTrue(!vowelTrue);
-        updateSettings();
+        //updateSettings();
     }
 
     const handleInputSubmit = (input) => {
-        if (answer.includes(input)) {
+        const currentQuestion = shuffledQuestions[currentIndex];
+        if (currentQuestion.answer.includes(input)) {
             if (wrongAnswer) {
                 setIsCorrect(true);
                 setWrongAnswer(false);
@@ -73,8 +89,10 @@ export default function App({ consonants, vowels }) {
 
     const handleNextQuestion = () => {
         setSkip(false);
-        setCurrentQuestion(Math.floor(Math.random() * questions.length));
+        //setCurrentQuestion(Math.floor(Math.random() * questions.length));
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % shuffledQuestions.length);
     }
+
     const handleSkip = () => {
         if (!wrongAnswer) {
             setScore((prev) => ({
@@ -90,6 +108,19 @@ export default function App({ consonants, vowels }) {
         setModal(!modal);
     }
 
+    useEffect(() => {
+        updateSettings();
+    }, [consonantTrue, vowelTrue]);
+
+    useEffect(() => {
+        updateSettings();
+    }, []);
+
+    if (shuffledQuestions.length === 0) return null;
+
+    const currentQuestion = shuffledQuestions[currentIndex];
+    const answerList = currentQuestion.answer.map((element, i) => [ i > 0 && ", ", <li key={i}>{element}</li>]);
+
     return (
         <div>
             <div className="top">
@@ -104,7 +135,7 @@ export default function App({ consonants, vowels }) {
             <button className="skip" onClick={handleSkip}>SKIP</button>
             {skip ? <ul className='answers'>{answerList}</ul> : null}
             <div>
-                <div className="kSymbol">{question}</div>
+                <div className="kSymbol">{currentQuestion.question}</div>
             </div>
             <AnswerInput input={input} setInput={setInput} isCorrect={isCorrect} handleInputSubmit={handleInputSubmit}/>
             {modal && (<div className='settingsModal'>
