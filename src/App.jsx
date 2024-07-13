@@ -91,6 +91,17 @@ export default function App({ consonants, vowels }) {
                     total: prev.total + 1
                 }))
                 setWrongAnswer(true);
+
+                //Insert the incorrect question back into the shuffled questions array, at least 5 questions away and at most 10 questions away
+                const incorrectQuestion = shuffledQuestions[currentIndex];
+                setShuffledQuestions((prev) => {
+                    const newQuestions = [...prev];
+                    newQuestions.splice(currentIndex, 1);
+                    const insertIndex = (currentIndex + Math.floor(Math.random() * 6) + 5) % newQuestions.length;
+                    newQuestions.splice(insertIndex, 0, incorrectQuestion);
+                    //console.log(newQuestions);
+                    return newQuestions;
+                });
             }
         }
     }
