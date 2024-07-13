@@ -37,6 +37,14 @@ export default function App({ consonants, vowels }) {
         if (vowelTrue) {
             temp = temp.concat(vowels);
         }
+
+        //If no options are selected, default to both
+        if (temp.length === 0) {
+            temp = consonants.concat(vowels);
+            setConsonantTrue(true);
+            setVowelTrue(true);
+            alert('Please select at least one option (Consonants or Vowels). Defaulting to both.');
+        }   
         setQuestions(temp);
         //setQuestionsLength(temp.length);
         //setCurrentQuestion(Math.floor(Math.random() * questionsLength));
