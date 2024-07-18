@@ -15,13 +15,30 @@ html {
   font-weight: 400;
   height: 100vh;
   width: 100vw;
+  flex-direction: column;
   /*background-color: #f0f2f5;*/
+  /*background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url("assets/decorative_image.png");
+  display: inline-table;*/
+  overflow: hidden;
+}
+
+#mainContent {
+  bottom: 0;
   background-size: 100% 100%;
   background-position: center;
   background-repeat: no-repeat;
   background-image: url("assets/decorative_image.png");
   display: inline-table;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  display: flex;
 }
 
 body{
@@ -108,6 +125,7 @@ body{
 }
 
 .answers {
+  z-index: 1;
   display: flex;
   width: 40%;
   left: 0;

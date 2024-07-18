@@ -151,12 +151,12 @@ export default function App({ consonants, vowels }) {
                     {score.correct + '/' + score.total}
                 </div>
             </div>
-            <button className="skip" onClick={handleSkip}>SKIP</button>
-            {skip ? <ul className='answers'>{answerList}</ul> : null}
-            <div>
-                <div className="kSymbol">{currentQuestion.question}</div>
+            <div id="mainContent">
+                <button className="skip" onClick={handleSkip}>SKIP</button>
+                {skip ? <ul className='answers'>{answerList}</ul> : null}
+                    <div className="kSymbol">{currentQuestion.question}</div>
+                <AnswerInput input={input} setInput={setInput} isCorrect={isCorrect} handleInputSubmit={handleInputSubmit}/>
             </div>
-            <AnswerInput input={input} setInput={setInput} isCorrect={isCorrect} handleInputSubmit={handleInputSubmit}/>
             {modal && (<div className='settingsModal'>
                 <div className='overlay'></div>
                 <div className='modalContent'>
