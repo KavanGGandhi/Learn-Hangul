@@ -152,7 +152,7 @@ export default function App({ consonants, vowels }) {
                 </div>
             </div>
             
-            <button className="skip" onClick={handleSkip}>SKIP</button>
+            <button className="h-10 px-6 font-semibold rounded-md bg-black text-white" type="submit" onClick={handleSkip}>SKIP</button>
             {skip ? <ul className='answers'>{answerList}</ul> : null}
                 <div className="kSymbol">{currentQuestion.question}</div>
             <AnswerInput input={input} setInput={setInput} isCorrect={isCorrect} handleInputSubmit={handleInputSubmit}/>
