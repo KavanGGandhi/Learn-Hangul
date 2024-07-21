@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -25,7 +29,7 @@ html {
   overflow: hidden;
 }
 
-#mainContent {
+/*#mainContent {
   bottom: 0;
   background-size: 100% 100%;
   background-position: center;
@@ -39,7 +43,7 @@ html {
   justify-content: center;
   align-items: center;
   display: flex;
-}
+}*/
 
 body{
   position: relative;
