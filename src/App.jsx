@@ -142,17 +142,23 @@ export default function App({ consonants, vowels }) {
 
     return (
         <div>
-            <div className="top">
+            <div className="flex justify-between p-4 bg-white shadow-md">
                 <button
-                onClick={toggleSettings} 
-                className="settingsButton"> 
-                Settings </button>
-                <div className="scoreboard">
+                    onClick={toggleSettings} 
+                    className="px-6 font-semibold rounded-md border border-slate-200 text-slate-900"> 
+                    Settings 
+                </button>
+                <div className="text-slate-900 font-semibold text-xl">
                     {score.correct + '/' + score.total}
                 </div>
             </div>
             
-            <button className="h-10 px-6 font-semibold rounded-md bg-black text-white" type="submit" onClick={handleSkip}>SKIP</button>
+            <button
+                className="h-10 px-6 font-semibold rounded-md bg-black text-white mt-20 mb-3"
+                type="submit"
+                onClick={handleSkip}>
+                Skip
+                </button>
             {skip ? <ul className='answers'>{answerList}</ul> : null}
                 <div className="kSymbol">{currentQuestion.question}</div>
             <AnswerInput input={input} setInput={setInput} isCorrect={isCorrect} handleInputSubmit={handleInputSubmit}/>
