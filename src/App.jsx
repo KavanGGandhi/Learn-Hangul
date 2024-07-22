@@ -48,8 +48,8 @@ export default function App({ consonants, vowels }) {
         setQuestions(temp);
         //setQuestionsLength(temp.length);
         //setCurrentQuestion(Math.floor(Math.random() * questionsLength));
-        let temp2 = shuffleArray([...temp]);
-        setShuffledQuestions(temp2);
+        //let temp2 = shuffleArray([...temp]);
+        setShuffledQuestions(shuffleArray([...temp]));
         //console.log(temp2);
         setCurrentIndex(0);
     }
@@ -91,15 +91,18 @@ export default function App({ consonants, vowels }) {
                     total: prev.total + 1
                 }))
                 setWrongAnswer(true);
-
+                 
                 //Insert the incorrect question back into the shuffled questions array, at least 5 questions away and at most 10 questions away
                 const incorrectQuestion = shuffledQuestions[currentIndex];
                 setShuffledQuestions((prev) => {
+                    console.log(prev);
                     const newQuestions = [...prev];
-                    newQuestions.splice(currentIndex, 1);
                     const insertIndex = (currentIndex + Math.floor(Math.random() * 6) + 5) % newQuestions.length;
-                    newQuestions.splice(insertIndex, 0, incorrectQuestion);
+                    newQuestions.splice(insertIndex, 1, incorrectQuestion);
                     //console.log(newQuestions);
+                    console.log("insert index: " + insertIndex);
+                    console.log("curr index: " + currentIndex);
+                    console.log(newQuestions);
                     return newQuestions;
                 });
             }
@@ -142,42 +145,58 @@ export default function App({ consonants, vowels }) {
 
     return (
         <div>
-            <div className="flex justify-between p-4 bg-white shadow-md">
-                <button
-                    onClick={toggleSettings} 
-                    className="px-6 font-semibold rounded-md border border-slate-200 text-slate-900"> 
-                    Settings 
-                </button>
-                <div className="text-slate-900 font-semibold text-xl">
-                    {score.correct + '/' + score.total}
-                </div>
-            </div>
-            
-            <button
-                className="h-10 px-6 font-semibold rounded-md bg-black text-white mt-20 mb-3"
-                type="submit"
-                onClick={handleSkip}>
-                Skip
-                </button>
-            {skip ? <ul className='answers'>{answerList}</ul> : null}
-                <div className="kSymbol">{currentQuestion.question}</div>
-            <AnswerInput input={input} setInput={setInput} isCorrect={isCorrect} handleInputSubmit={handleInputSubmit}/>
-            
-            {modal && (<div className='settingsModal'>
-                <div className='overlay'></div>
-                <div className='modalContent'>
-                    Settings
-                    <br></br>
-                    <button 
-                    style={consonantTrue ? {backgroundColor: "green"} : {backgroundColor: "red"}}
-                    onClick={toggleConsonants}>Consonants</button>
-                    <button 
-                    style={vowelTrue ? {backgroundColor: "green"} : {backgroundColor: "red"}} 
-                    onClick={toggleVowels}>Vowels</button>
-                    <button onClick={toggleSettings} className='closeModal'>X</button>
+            <div className="flex-none font-sans">
+                <div className="flex-none relative">
+                    <div className="flex justify-between p-4 bg-white shadow-md">
+                    <button
+                        onClick={toggleSettings} 
+                        className="px-6 font-semibold rounded-md border border-slate-200 text-slate-900 text-xl"> 
+                        Settings 
+                    </button>
+                    <div className="text-slate-900 font-semibold text-3xl">
+                        {score.correct + '/' + score.total}
+                    </div>
                 </div>
                 
-            </div>)}
+                <button
+                    className="h-10 px-6 font-semibold rounded-md bg-black text-white mt-20 mb-3 text-2xl"
+                    type="submit"
+                    onClick={handleSkip}>
+                    Skip
+                </button>
+
+                {skip ? <ul className='answers mt-4 text-slate-700 font-medium'>{answerList}</ul> : null}
+                    <div className="kSymbol">{currentQuestion.question}</div>
+                <AnswerInput input={input} setInput={setInput} isCorrect={isCorrect} handleInputSubmit={handleInputSubmit}/>
+                
+                {modal && (
+                    <div className='fixed inset-0 flex items-center justify-center z-50'>
+                        <div className='absolute inset-0 bg-black opacity-50'></div>
+                        <div className='bg-white rounded-lg p-6 w-11/12 max-w-md mx-auto z-10'>
+                        <div className='flex justify-between items-center mb-4'>
+                            <h2 className='text-xl font-semibold text-slate-900'>Settings</h2>
+                            <button onClick={toggleSettings} className='text-slate-900 font-bold'>
+                            X
+                            </button>
+                        </div>
+                        <div className='space-y-1'>
+                            <button
+                            className={`w-4/12 py-2 rounded-md mr-3 ${consonantTrue ? 'bg-green-500 text-white' : 'bg-red-500 text-white'}`}
+                            onClick={toggleConsonants}>
+                            Consonants
+                            </button>
+
+                            <button
+                            className={`w-4/12 py-2 rounded-md ml-3 ${vowelTrue ? 'bg-green-500 text-white' : 'bg-red-500 text-white'}`}
+                            onClick={toggleVowels}>
+                            Vowels
+                            </button>
+                        </div>
+                        </div>
+                    </div>
+                    )}
+                </div>
+            </div>
         </div>
     )
 };

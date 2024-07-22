@@ -18,25 +18,34 @@ export default function AnswerInput({ input, setInput, isCorrect, handleInputSub
     }
 
     return (
-        <div>
-            <div>
-                <input 
-                    className="answerInput"
-                    type="text" 
-                    value={input}
-                    onChange={handleInputChange}
-                    onKeyDown={handleKeyDown}/>
-                <button className="submit" onClick={handleSubmit}>Submit</button>
-            </div>
+        <div className="flex flex-col items-center p-4">
+          <div className="flex space-x-2 mb-4">
+            <input 
+              className="border border-gray-300 rounded-md p-2 w-full"
+              type="text" 
+              value={input}
+              onChange={handleInputChange}
+              onKeyDown={handleKeyDown}
+              placeholder="Type your answer..."
+            />
+            <button 
+              className="h-10 px-6 font-semibold rounded-md bg-black text-white"
+              onClick={handleSubmit}
+            >
+              Submit
+            </button>
+          </div>
+          <div className="mt-2 text-center">
             {isCorrect === true && (
-                <div style={{color: 'green'}}>Correct!</div>
+              <div className="text-green-500 font-medium">Correct!</div>
             )}
             {isCorrect === false && (
-                <div style={{color: 'red'}}>Incorrect!</div>
+              <div className="text-red-500 font-medium">Incorrect!</div>
             )}
             {isCorrect === null && (
-                <div> </div>
+              <div>&nbsp;</div>
             )}
+          </div>
         </div>
-        );
+      );
 }
