@@ -159,7 +159,7 @@ export default function App({ consonants, vowels }) {
                 </div>
                 
                 <button
-                    className="h-10 px-6 font-semibold rounded-md bg-black text-white mt-20 mb-3 text-2xl"
+                    className="h-10 px-6 font-semibold rounded-md bg-black text-white mt-[10vh] mb-3 text-2xl"
                     type="submit"
                     onClick={handleSkip}>
                     Skip
